@@ -6,36 +6,36 @@ class ProductManager {
 
     addProduct(title, description, price, thumbnail, code, stock) {
     // Validar que todos los campos sean obligatorios
-    if (!title || !description || !price || !thumbnail || !code || !stock) {
-        console.log("Error: Todos los campos son obligatorios");
-        return;
-    }
+        if (!title || !description || !price || !thumbnail || !code || !stock) {
+            console.log("Error: Todos los campos son obligatorios");
+            return;
+        }
 
-    // Validar que no se repita el campo "code"
-    const existingProduct = this.products.find(
-        (product) => product.code === code
-    );
-    if (existingProduct) {
-        console.log("Error: Ya existe un producto con el mismo código");
-        return;
-    }
+        // Validar que no se repita el campo "code"
+        const existingProduct = this.products.find(
+            (product) => product.code === code
+        );
+        if (existingProduct) {
+            console.log("Error: Ya existe un producto con el mismo código");
+            return;
+        }
 
-    // Agregar el producto al arreglo de productos
-    const newProduct = {
-        id: this.productIdCounter,
-        title: title,
-        description: description,
-        price: price,
-        thumbnail: thumbnail,
-        code: code,
-        stock: stock,
-    };
-    this.products.push(newProduct);
+        // Agregar el producto al arreglo de productos
+        const newProduct = {
+            id: this.productIdCounter,
+            title: title,
+            description: description,
+            price: price,
+            thumbnail: thumbnail,
+            code: code,
+            stock: stock,
+        };
+        this.products.push(newProduct);
 
-    // Incrementar el contador de IDs
-    this.productIdCounter++;
+        // Incrementar el contador de IDs
+        this.productIdCounter++;
 
-    console.log("Producto agregado correctamente");
+        console.log("Producto agregado correctamente");
     }
 
     getProducts() {
