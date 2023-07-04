@@ -4,8 +4,8 @@ class ProductManager {
     constructor(path) {
         this.path = path;
         this.products = [];
-        this.productIdCounter = 1;  // Contador para generar IDs autoincrementables
-        this.loadProducts();    // Cargar productos desde el archivo al iniciar
+        this.productIdCounter = 1; // Contador para generar IDs autoincrementables
+        this.loadProducts(); // Cargar productos desde el archivo al iniciar
     }
 
     loadProducts() {
@@ -27,14 +27,14 @@ class ProductManager {
         // Validar que todos los campos sean obligatorios
         const { title, description, price, thumbnail, code, stock } = product;
         if (!title || !description || !price || !thumbnail || !code || !stock) {
-            console.log("Error: Todos los campos son obligatorios");
+            console.log('Error: Todos los campos son obligatorios');
             return;
         }
 
         // Validar que no se repita el campo "code"
         const existingProduct = this.products.find((p) => p.code === code);
         if (existingProduct) {
-            console.log("Error: Ya existe un producto con el mismo código");
+            console.log('Error: Ya existe un producto con el mismo código');
             return;
         }
 
@@ -51,10 +51,13 @@ class ProductManager {
         // Guardar los productos en el archivo
         this.saveProducts();
 
-        console.log("Producto agregado correctamente");
+        console.log('Producto agregado correctamente');
     }
 
-    getProducts() {
+    getProducts(limit) {
+        if (limit) {
+            return this.products.slice(0, limit);
+        }
         return this.products;
     }
 
@@ -63,7 +66,7 @@ class ProductManager {
         if (product) {
             return product;
         } else {
-            throw new Error("Error: Producto no encontrado");
+            throw new Error('Error: Producto no encontrado');
         }
     }
 
@@ -74,9 +77,9 @@ class ProductManager {
             updatedFields.id = id;
             this.products[productIndex] = { ...this.products[productIndex], ...updatedFields };
             this.saveProducts();
-            console.log("Producto actualizado correctamente");
+            console.log('Producto actualizado correctamente');
         } else {
-            console.log("Error: Producto no encontrado");
+            console.log('Error: Producto no encontrado');
         }
     }
 
@@ -85,9 +88,9 @@ class ProductManager {
         if (productIndex !== -1) {
             this.products.splice(productIndex, 1);
             this.saveProducts();
-            console.log("Producto eliminado correctamente");
+            console.log('Producto eliminado correctamente');
         } else {
-            console.log("Error: Producto no encontrado");
+            console.log('Error: Producto no encontrado');
         }
     }
 }
